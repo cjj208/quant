@@ -23,4 +23,4 @@ df = df.rename(columns={"//时间":"Date","开盘价":"Open","最高价":"High",
 
 df = df.iloc[-2000:]
 
-print (df)
+print (df.tail())

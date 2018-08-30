@@ -1,34 +1,22 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Wed Jun  6 17:50:09 2018
-
-@author: JimchanChen
-"""
-
-# -*- coding: utf-8 -*-
 import numpy as np
 import talib
-import mpl_finance 
 import pandas as pd
-#import matplotlib.finance as mpf
 import matplotlib.pyplot as plt
-from matplotlib import style
-from pyti.exponential_moving_average import exponential_moving_average as ema
-import pyti
-import Ta_Lib as tl
+from mpl_finance import candlestick_ohlc
+import matplotlib.ticker as ticker
+import technical_indicators 
+import config
+import scipy.stats as scs
+import empyrical
+import time
+import pyfolio as pf
+pat = {'光头光脚缺影线':talib.CDLMARUBOZU,'吞噬模式':talib.CDLENGULFING,}
 
+path = (r"F:\jimcfile\py_financial\python_p\python_p\jimc\rb1810_m5.csv")
 
-period = 10
+df = pd.read_csv(path,encoding='gbk')
+df = df.rename(columns={"//时间":"Date","开盘价":"Open","最高价":"High","最低价":"Low","收盘价":"Close","成交量":"Volume","持仓量":"openInterest"})
 
-
-path = (r"d:\XAUUSD_H4.csv")
-path2 = (r'd:\XAUUSD_D1.csv')
-
-row = ['Date','Time','Open','High','Low','Close','Volume']
-
-df = pd.read_csv(path2,header=0,names=row,parse_dates=True,index_col=0)
-#kline = df["Open"].values,df["High"].values,df["Low"].values,df["Close"].values
-#由于tailib不能使用pandas的数据列，因此转换成VALUES
-df['ma10'] = ema(df['Close'], period)
-print (df.tail())
-
+df = df.iloc[-1000:]
+print (df.Close)

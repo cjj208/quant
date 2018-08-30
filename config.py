@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 import talib
 import pandas as pd
 
@@ -215,44 +215,3 @@ def zigzag(s, pct=5):
 
     return pd.Series(zzp, index=zzd)
 
-
-
-def action(df):
-    action = [0]
-    direction = [0]    
-    for i in df.index:
-        print (df.iloc[i])
-        if action[-1] == 0:
-            if  (df.iloc[i,df.columns.get_loc("cross520")]==1) & (df.iloc[i,df.columns.get_loc("ma89144")]==1):
-
-                df.iloc[i,df.columns.get_loc('action')] ='openBuy'
-                action.append(1)
-                direction.append(1)
-        
-    
-            if  (df.iloc[i,df.columns.get_loc("cross520")]==-1) & (df.iloc[i,df.columns.get_loc("ma89144")]==-1):
-    
-                df.iloc[i,df.columns.get_loc('action')] ='openSell'
-                action.append(-1)
-                direction.append(-1)
-              
-    
-        elif (action[-1] == 1) & (direction[-1] == 1):
-
-            if  df.iloc[i,df.columns.get_loc('cross520')] == -1:
-                df.iloc[i,df.columns.get_loc('action')] ='closeSell'
-                action.append(0)
-                direction.append(0)
-    
-    
-        elif (action[-1] == -1) & (direction[-1] == -1):
-
-            if  df.iloc[i,df.columns.get_loc('cross520')] == 1:
-                
-                df.iloc[i,df.columns.get_loc('action')] ='closeBuy'
-                action.append(0)
-                direction.append(0)
-
-    return df
-    
-    
